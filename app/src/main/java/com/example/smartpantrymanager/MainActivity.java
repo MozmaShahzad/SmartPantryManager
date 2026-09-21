@@ -57,9 +57,25 @@ public class MainActivity extends AppCompatActivity{
             Intent intent = new Intent(MainActivity.this, AddEditIngredientActivity.class);
             startActivity(intent);
         });
+
+        com.google.android.material.bottomnavigation.BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+        bottomNav.setSelectedItemId(R.id.nav_pantry);//highlight Pantry
+        bottomNav.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if(id == R.id.nav_pantry) {
+                return true;
+            } else if (id == R.id.nav_recipes) {
+                startActivity(new Intent(MainActivity.this, SuggestedRecipesActivity.class));
+                return true;
+            } else if (id == R.id.nav_settings) {
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                return true;
+            }
+            return false;
+        });
     }
     //onResume runs everytime this screen becomes visible
-    //to make sure the list is always upto date
+    //to make sure the list is always up-to date
     @Override
     protected void onResume() {
         super.onResume();

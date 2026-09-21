@@ -52,6 +52,7 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
         PantryItem item = items.get(position);
         holder.itemName.setText(item.name);
         holder.itemQuantity.setText(item.quantity + " " + item.unit);
+        holder.itemEmoji.setText(FoodEmojiHelper.getEmoji(item.name));
 
         // Tapping the row opens it for editing
         holder.itemView.setOnClickListener(v -> listener.onItemClick(item));
@@ -68,13 +69,14 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
     //holds references to the views inside one row, so we don't have to
     //call findViewById() repeatedly - this improves scrolling performance
     static class PantryViewHolder extends RecyclerView.ViewHolder{
-        TextView itemName,itemQuantity;
+        TextView itemName,itemQuantity,itemEmoji;
         ImageButton deleteButton;
 
         public PantryViewHolder(@NonNull View itemView) {
             super(itemView);
             itemName=itemView.findViewById(R.id.itemName);
             itemQuantity=itemView.findViewById(R.id.itemQuantity);
+            itemEmoji = itemView.findViewById(R.id.itemEmoji);
             deleteButton=itemView.findViewById(R.id.deleteButton);
         }
     }
